@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid">
+        <div class="list-group-item active">
+            Listado de estudiantes
+        </div>
+        <div class="list-group-item">
+        {{include("/Colegio/estudiantes/formBusqEstudiantes.html.twig")}}
+        </div>
+   </div>
+{% endblock %}

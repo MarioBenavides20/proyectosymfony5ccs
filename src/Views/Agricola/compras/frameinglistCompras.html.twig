@@ -1,0 +1,58 @@
+{# CRACION DE EL FRAME QUE VAMOS A UTILIZAR CON TURBO PARA QUE NO SE RECARGE #}
+<turbo-frame id="frame-agricola">
+
+			{# <turbo-frame id="frame-agricola" src="{{ path('agricola_ing_det', {idCompra:idCompra}) }}" ></turbo-frame> #}
+			{{include("/Agricola/compras/ingdet.html.twig")}}
+
+		{% if compradet|length == 0 %}
+			No se encontraron detalles
+			{%else%}
+
+		<table class="table table-hover table-bordered table-sm mb-0" >
+			<thead class="table-secondary" >
+				<tr>
+					<th style="color:#067cfa"> Producto</th>
+					<th style="color:#067cfa" class="text-right">Cantidad</th>
+					<th style="color:#067cfa" class="text-right">Vr Unidad</th>
+					<th style="color:#067cfa" class="text-right">Subtotal</th>
+					<th style="color:#067cfa" class="text-right">Iva</th>
+					<th style="color:#067cfa" class="text-right">Vr Iva</th>
+					<th style="color:#067cfa" class="text-right">Total</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody data-controller="agricolatot">
+				{% for dato in compradet %}
+					<tr>
+						<td>{{ dato.producto_nombre }}</td>
+						<td align="right">{{ dato.cant | number_format(2, ',', '.')}}</td>
+						<td align="right">{{ dato.vrunidad | number_format(2, ',', '.')}}</td>		
+						<td align="right">{{ dato.subtotal | number_format(2, ',', '.')}}</td>	
+						<td align="right">{{ dato.iva}}%</td>	
+						<td align="right">{{ dato.vriva | number_format(2, ',', '.')}}</td>	
+						<td align="right">{{ dato.total | number_format(2, ',', '.')}}</td>	
+
+						<td align="center">
+						<a href="{{path('agricola_elim_prod',{id:dato.id, idCompra:idCompra})}}">
+						    {# Icono de eliminar #}
+							<span class="fa-solid fa-trash-can" style="width: 15px; color: red;"></span> 
+						</a>
+						</td>		
+
+						<td align="center">
+						<a href="{{path('agricola_edit_prod',{id:dato.id, idCompra:idCompra} )}}">
+						    {# Icono de editar #}
+							<span class="fa-solid fa-pencil" style="width: 15px; color:#067cfa;"></span> 
+						</a>
+						</td>	
+
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+		<br>
+		{{ knp_pagination_render(compradet) }} 
+</turbo>

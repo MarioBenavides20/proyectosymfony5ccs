@@ -1,0 +1,174 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+    {{ parent()}}
+    <div class="container-fluid">
+        <div class="card my-2">
+            <div class="card-header text-white" style="background-color: #007bff;"><b>Nueva compra</b>
+            </div> 
+                <div class="card-body">
+{#//////////////////////////////////////////////////////////////////////////CREACION DE MODAL AGREGAR PROVEEDOR////////////////////////////////////////////////////////////#}
+				<!-- Button modal -->
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#crearproveedorModal"> <b>
+						<i class="fa-solid fa-user-plus"></i> Add Proveedor</b>
+					</button>
+				<!-- Modal -->
+                    <div class="modal fade" id="crearproveedorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        {{ form_start(form_proveedor, {'attr':{'data-controller': 'agricola', 'class':'was-validated'} })}}
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header" style="background-color:#067cfa; color:white">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        <b>Ingresar Proveedor</b>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="col-1"><br></div>
+
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 95px">
+                                            <b>Nombre</b>
+                                        </span>
+                                        {{ form_widget(form_proveedor.nombre, {'attr' : {'class' : 'form-control', 'data-action':'agricola#validarproveedor', 'data-agricola-target': 'valprovee'}}) }}
+                                    </div>
+                                        <p style="color: red" data-agricola-target="msj"></p>
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 95px">
+                                            <b>Nit</b>
+                                        </span>
+                                        {{ form_widget(form_proveedor.nit, {'attr' : {'class' : 'form-control', 'data-agricola-target': 'selectForm'}}) }}
+                                    </div>
+
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 95px">
+                                            <b>Direccion</b>
+                                        </span>
+                                        {{ form_widget(form_proveedor.direccion, {'attr' : {'class' : 'form-control', 'data-agricola-target': 'selectForm'}}) }}
+                                    </div>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-libros-target="closemodal" >Cancelar</button>
+                                    {{ form_widget(form_proveedor.guardar, {'attr' : {'class' : 'btn btn-primary', 'data-agricola-target': 'selectForm'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form_proveedor) }}
+                    </div>
+
+                   <label style="float: right;">{{nocompra}}</label>
+
+{# /////////////////////////////////////////////////////////////////////////CREACION DE MODAL AGREGAR PRODUCTO/////////////////////////////////////////////////////////////#}
+				<!-- Button modal -->
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#crearproductoModal">
+                        <b><i class="fa-solid fa-plus"></i> Add Producto</b>
+                    </button>
+				<!-- Modal -->
+                    <div class="modal fade" id="crearproductoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        {{ form_start(form_producto , {'attr':{'data-controller': 'agricola', 'class':'was-validated'} })}}
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-header" style="background-color:#067cfa; color:white">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        <b>Ingresar Producto</b>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body" , data-agricola-target='valproveedor'>
+                                    <div class="col-1"><br></div>
+
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 100px">
+                                            <b>Codigo</b>
+                                        </span>
+                                        {{ form_widget(form_producto.codigo, {'attr' : {'class' : 'form-control', 'data-action':'agricola#validarproducto', 'data-agricola-target': 'valproduc'}}) }}
+                                    </div>
+                                        <p style="color: red" data-agricola-target="msj"></p>
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 100px">
+                                            <b>Nombre</b>
+                                        </span>
+                                        {{ form_widget(form_producto.nombre, {'attr' : {'class' : 'form-control','data-agricola-target': 'selectForm'}}) }}
+                                    </div>
+
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 100px">
+                                            <b>Existencia</b>
+                                        </span>
+                                        {{ form_widget(form_producto.existencia, {'attr' : {'class' : 'form-control', 'data-agricola-target': 'selectForm'}}) }}
+                                    </div>
+
+                                    <div class="input-group my-4">
+                                        <span class="input-group-text" style="width: 100px">
+                                            <b>Costo</b>
+                                        </span>
+                                        {{ form_widget(form_producto.costo, {'attr' : {'class' : 'form-control', 'data-agricola-target': 'selectForm'}}) }}
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-libros-target="closemodal">Cancelar</button>
+                                    {{ form_widget(form_producto.guardar, {'attr' : {'class' : 'btn btn-primary', 'data-agricola-target': 'selectForm'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form_producto) }}
+                    </div>
+
+{# /////////////////////////////////////////////////////////////////////////CREACION DE CABECERA//////////////////////////////////////////////////////////////////////////#}
+                    <hr>
+					{{form_start(form_cabcompras)}}
+					<div class="row">
+						<div class="list-group-item col-md-6" style="border: 1px grey;">
+							<div class="col-8">
+								<div class="input-group">
+									<span class="input-group-text"><b>Fecha</b></span>
+									{{ form_widget(form_cabcompras.fecha, {'attr' : {'class' : 'form-control'}}) }}
+								</div>
+							</div>
+						</div> 
+						<div class="list-group-item col-md-6" style="border: 1px grey;">
+							<div class="col-8">
+								<div class="input-group">
+									<span class="input-group-text"><b>Proveedores</b></span>
+									{{ form_widget(form_cabcompras.proveedor, {'attr' : {'class' : 'custom-select', 'data-action':'agricola#buscarProveedores'}}) }}
+								</div>
+							</div>
+						</div> 
+					</div> 	
+
+                    <br>
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <turbo-frame id="frame-agricola" src="{{ path('agricola_lista', {idCompra : idCompra}) }}">
+                        </turbo-frame>
+                    </div>
+
+					<div class:"row">
+						<div class="col-lg-4 col-sm-2"></div>
+						<div class="col-lg-4 col-sm-5 ml-auto">
+                            <div class="card-body">
+                                <turbo-frame id="frame-agricola" src="{{ path('agricola_calculartotales') }}">
+                                </turbo-frame>
+                            </div>
+						</div>
+
+						<div class="col-lg-4 col-sm-5">
+							{{ form_widget(form_cabcompras.guardar, {'attr' : {'class' : 'btn btn-outline-primary'}}) }}
+                            <a href="{{path('agricola_cancel_compra', {id : idCompra})}}" class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i> Cancelar</a> 
+						</div>
+					</div>
+					{{ form_end(form_cabcompras) }}
+                </div
+        </div>
+    </div>
+{% endblock %}

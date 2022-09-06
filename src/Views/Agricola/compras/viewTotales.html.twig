@@ -1,0 +1,19 @@
+<turbo-frame id="frame-agricola">
+        <table class="table table-sm table-clear" data-agricolatot-target="sumtotal" id = "tablatot">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <th>SUBTOTAL</th>
+                    <td id="subtotal">${{subtotal | number_format(2, ',', '.')}}</td>
+                </tr>
+                <tr>
+                    <th>IVA</th>
+                    <td id="iva">${{iva | number_format(2, ',', '.')}}</td>
+                </tr>
+                <tr>
+                    <th>TOTAL</th>
+                    <th id="total">${{total | number_format(2, ',', '.')}}</th>
+                </tr>
+            </tbody>
+        </table>
+</turbo>

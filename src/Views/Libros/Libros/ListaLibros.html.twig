@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	{{ parent() }}
+	<div class="container-fluid">
+		<div class="list-group-item active">
+			<b>Buscar en biblioteca</b>
+		</div>
+		<div class="list-group-item">
+			{{include("/Libros/Libros/formBusqLibros.html.twig")}}
+		</div>
+		{# se trae todo el path de las rutas Libros de la carpeta Routing #}
+		<turbo-frame id="frame-libros" src=" {{ path('libros_frame_lib') }} ">
+			<div class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Cargando</span>
+			</div>
+		</turbo-frame>
+	</div>
+	<br>
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLibModal">
+		<b> <i class="fa-solid fa-plus"></i> Agregar libro</b>
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="newLibModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		{{ form_start(nuevoLib, {'attr':{'data-controller': 'libros','data-turbo-frame':'frame-libros', 'data-action':'turbo:submit-end->libros#limpiarfrm', 'class':'was-validated'} }) }}
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#067cfa; color:white">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<b>Ingresar libro</b>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body" , data-libros-target='valLibro'>
+					<div class="col-1"><br>
+					</div>
+					<div class="input-group my-4">
+						<span class="input-group-text" style="width: 80px" ><b>Nombre</b></span>
+						{# {{ form_label(nuevoLib.nombre) }} #}
+						{{ form_widget(nuevoLib.nombre, {'attr' : {'class' : 'form-control', 'data-action':'libros#validarLibro'}}) }}
+					</div>
+
+					<p id="msj_libroinv" style="color: red" data-libros-target="msj"></p>
+
+					<div class="input-group my-4">
+						<span class="input-group-text" style="width: 80px"><b>Autor</b></span>
+						{# {{ form_label(nuevoLib.autor) }} #}
+						{{ form_widget(nuevoLib.autor, {'attr' : {'class' : 'form-control    '}}) }}
+					</div>
+
+					<div class="input-group my-4">
+						<span class="input-group-text" style="width: 80px"><b>Editorial</b></span>
+						{# {{ form_label(nuevoLib.editorial) }} #}
+						{{ form_widget(nuevoLib.editorial, {'attr' : {'class' : 'form-control    '}}) }}
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					{# <button type="button" class="btn btn-secondary" data-dismiss="modal" data-libros-target="closemodal">Close</button> #}
+				    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-libros-target="closemodal">Cancelar</button>
+					{{ form_widget(nuevoLib.guardar, {'attr' : {'class' : 'btn btn-primary'}}) }}
+				</div>
+			</div>
+		</div>
+		{{ form_end(nuevoLib) }}
+	</div>
+</div>{% endblock %}

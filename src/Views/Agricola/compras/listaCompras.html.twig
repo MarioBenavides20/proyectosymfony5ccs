@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid">
+        <div class="list-group-item active">
+            <b>Listado de compras</b>
+        </div>
+
+        {# Llamado de la vista independiente de formBusqCompras #}
+        <div class="list-group-item">
+        {{include("/Agricola/compras/formBusqCompras.html.twig")}}
+        </div>
+
+    	{# se trae todo el path de las rutas Libros de la carpeta Routing #}
+		<turbo-frame id="frame-compras" src=" {{ path('agricola_frame_compr') }} ">
+			<div class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Cargando</span>
+			</div>
+		</turbo-frame>
+        <br>
+        <a class="btn btn-outline-primary" href="{{path('agricola_nueva_compr')}}" role="button"><i class="fa-solid fa-arrow-up-right-from-square"></i> Nueva compra</a>
+   
+   </div>
+{% endblock %}

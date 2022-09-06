@@ -1,0 +1,38 @@
+{# CREACION DEL FORMULARIO DE CABECERA UTILIZANDO BOOSTRAP #}
+{{ form_start(form, {'attr':{'data-controller': 'libros', 'data-turbo-frame':'frame-libros'} }) }}
+<div data-libros-target='formulario'>
+	<div class="form-group row">
+
+		<div class="col-4">
+			<div class="input-group">
+				{# {{ form_label(form.pais) }} #}
+				<span class="input-group-text"><b>Pais</b></span>
+				{{ form_widget(form.pais, {'attr' : {'class' : 'custom-select', 'data-action':'libros#buscarAutores'}}) }}
+			</div>  	
+		</div>
+
+		
+		<div class="col-3">
+			<div class="input-group">
+				{# {{ form_label(form.autor) }} #}
+				<span class="input-group-text"><b>Autor</b></span>
+				{{ form_widget(form.autor, {'attr' : {'class' : 'custom-select'}}) }}
+			</div>
+		</div>
+
+		<div class="col-3">
+			<div class="input-group">
+			{# {{ form_label(form.editorial) }} #}
+			<span class="input-group-text" ><b>Editorial</b></span>
+			{{ form_widget(form.editorial, {'attr' : {'class' : 'form-control'}}) }}
+			</div>
+		</div>
+
+		<div class="col-2">
+			<div class="input-group">
+			 {{ form_widget(form.Buscar, {'attr' : {'class' : 'btn btn-outline-success', 'data-libros-target':'buscador'}}) }}
+			</div>
+		</div>
+		
+		{{ form_end(form) }}
+	</div>

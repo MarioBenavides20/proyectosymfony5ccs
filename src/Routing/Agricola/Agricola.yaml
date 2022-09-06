@@ -1,0 +1,86 @@
+# /////////////////VISTA VISUALIZACION PRINCIPAL SECCION1////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# ////Esta es para crear la ruta relacionando el controlador con el metodo de funcionamiento interno
+agricola_bienvenida: 
+    path:     /home/agricola
+    defaults: { _controller: App\Controller\Agricola\agricolaController::bienvenida}
+
+#////Esta es para crear la ruta del primer formulario de filtro (cabecera), IMPORTANTE: Los formularios de busqueda se crean en el controlador 
+agricola_compras_form:
+     path:     /agricola/formbusqueda
+     defaults: { _controller: App\Controller\Agricola\agricolaController::formBusqComp}
+#////Esta es para listar las compras completas en el principal
+agricola_frame_compr:
+    path:     /agricola/frameCompr
+    defaults: { _controller: App\Controller\Agricola\agricolaController::listarcompras}
+
+
+# /////////////////////VISTA NUEVA COMPRA SECCION2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# ////Esta vista es para crear la cabecera de la nueva compra
+agricola_nueva_compr:
+    path:     /viewcomprs/nuevaComp/{id}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::nuevascompras, id : 0}
+
+#////Esta es para creear y guardar nuevo proveedor-Modal
+agricola_nuevo_prov:
+    path:     /viewcomprs/guardarProv
+    defaults: { _controller: App\Controller\Agricola\agricolaController::guardarproveedor}
+    
+#////Esta es para creear y guardar nuevo producto-Modal
+agricola_nuevo_prod:
+    path:     /viewcomprs/guardarProd
+    defaults: { _controller: App\Controller\Agricola\agricolaController::guardarproducto}
+
+#////Esta es para crear la cabecera guardar fecha proveedor 
+agricola_nueva_cabc:
+    path:     /viewcomprs/guardarcabc/{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::guardarcabcompras, idCompra : 0}
+
+#////Esta es para crear los detalles de la compra
+agricola_nueva_det:
+    path:     /viewcomprs/guardardet/{id},{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::guardardetcompras, id : 0, idCompra: 0}
+
+#////Esta es para agregar el frame donde lista los detalles ingresados
+agricola_lista:
+    path:     /viewcomprs/lista/{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::listadet, idCompra : 0}
+
+#////Esta es para agregar los detalles en los intputs
+agricola_ing_det:
+    path:     /viewcomprs/ingdet/{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::ingdet, idCompra : 0}
+
+#////Esta es para eliminar los detalles del producto
+agricola_elim_prod:
+    path:     /viewcomprs/elimprod/{id},{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::eliminardetprod, id : 0 , idCompra : 0}
+
+#////Esta es para crear la busqueda de si existe o no el proveedor en la base de datos
+agricola_validar_proveedor:
+    path:   /viewcomprs/validarproveedor
+    defaults: {_controller: App\Controller\Agricola\agricolaController::validarProveedor}
+
+#////Esta es para crear la busqueda de si existe o no el producto en la base de datos
+agricola_validar_producto:
+    path:   /viewcomprs/validarproducto
+    defaults: {_controller: App\Controller\Agricola\agricolaController::validarProducto}
+
+#////Para calcular y visualizar totales
+agricola_calculartotales:
+    path:   /viewcomprs/calculartotales
+    defaults: {_controller: App\Controller\Agricola\agricolaController::calculartotales}
+
+# agricola_frame_calculartotales:
+#     path:   /viewcomprs/calcularframetotales
+#     defaults: {_controller: App\Controller\Agricola\agricolaController::calcularframetotales}
+
+#////Esta es para eliminar los detalles del producto
+agricola_edit_prod:
+    path:     /viewcomprs/editar/{id},{idCompra}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::editardetprod, id : 0, idCompra : 0}
+
+#////Esta es para eliminar los detalles del producto
+agricola_cancel_compra:
+    path:     /viewcomprs/cancelar/{id}
+    defaults: { _controller: App\Controller\Agricola\agricolaController::cancelarCompra, id : 0}

@@ -1,0 +1,29 @@
+# Esta es para crear la ruta relacionando el controlador con el metodo de funcionamiento interno
+libros_bienvenida: 
+    path:     /home/libros
+    defaults: { _controller: App\Controller\Libros\librosController::bienvenida}
+
+#Esta es para crear la ruta del primer formulario de filtro (cabecera), IMPORTANTE: Los formularios de busqueda se crean en el controlador 
+libros_libros_form:
+     path:     /libros/formbusqueda
+     defaults: { _controller: App\Controller\Libros\librosController::formBusqLib}
+
+libros_frame_lib:
+    path:     /libros/frameLib
+    defaults: { _controller: App\Controller\Libros\librosController::listarLibros}
+
+libros_guardar_lib:
+    path:     /libros/guardarLib/{idLibro}
+    defaults: { _controller: App\Controller\Libros\librosController::guardarLib}
+
+libros_ver_lib:
+    path:     /viewLibs/verLib/{id}
+    defaults: { _controller: App\Controller\Libros\librosController::verLibro}
+
+libros_eliminar_lib:
+    path:     /libros/eliminarLibs/{id}
+    defaults: { _controller: App\Controller\Libros\librosController::eliminarLibro}
+
+libros_validar_libro:
+    path:     /libros/validarLibro
+    defaults: { _controller: App\Controller\Libros\librosController::validarLibro}

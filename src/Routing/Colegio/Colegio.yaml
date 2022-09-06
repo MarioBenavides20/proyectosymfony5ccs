@@ -1,0 +1,7 @@
+colegio_bienvenida:
+    path:     /home
+    defaults: { _controller: App\Controller\Colegio\colegioController::bienvenida}
+
+colegio_estudiantes_form:
+    path:     /estudiantes/formbusqueda
+    defaults: { _controller: App\Controller\Colegio\colegioController::formBusqEst}

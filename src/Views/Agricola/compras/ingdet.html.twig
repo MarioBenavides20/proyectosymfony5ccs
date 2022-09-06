@@ -1,0 +1,74 @@
+{# CREACION DEL FORMULARIO DE CABECERA UTILIZANDO BOOSTRAP #}
+<turbo-frame id="frame-agricola">
+        {% for message in app.flashes('mensaje') %}
+                <div class="alert alert-dismissible alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="container">{{ message }}</div>
+                </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+                <div class="alert alert-dismissible alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="container">{{ message }}</div>
+                </div>
+        {% endfor %}
+
+    {{ form_start(form_det, {'attr':{'data-controller': 'agricola', 'data-turbo-frame':'frame-agricola', 'data-action': 'turbo:submit-end->agricola#grDetalles' } }) }}
+    <div data-libros-target='formulario'>
+            <div class="row">
+                    <div class="list-group mx-1 col-2"  >
+                        <b><label for="">Producto</label></b>
+                        {{ form_widget(form_det.producto, {'attr' : {'class' : 'custom-select'}}) }}
+                    </div>  	
+            
+                    <div class="list-group mx-1 col-1">
+                        <b><label for="">Cantidad</label></b>
+                        {{ form_widget(form_det.cant, {'attr' : {'class' : 'form-control'}}) }}
+                    </div>
+
+
+                    <div class="list-group mx-1 col-1">
+                        <b><label for="">Vr Unidad</label></b>
+                        {{ form_widget(form_det.vrunidad, {'attr' : {'class' : 'form-control', 'data-action':'blur->agricola#operacion'}}) }}
+                    </div>
+
+                    <div class="list-group mx-1 col-2">
+                            <b><label for="">Subtotal</label></b>
+                            {{ form_widget(form_det.subtotal, {'attr' : {'class' : 'form-control', 'data-agricola-target':'valcampsub', 'readonly': true}}) }}
+                    </div>
+
+                    <div class="list-group mx-1 col-1">
+                            <b><label for="">Iva</label></b>
+                            {{ form_widget(form_det.iva, {'attr' : {'class' : 'form-control', 'data-action':'blur->agricola#operacion', 'max':'19', 'min':'0'}}) }}
+                            <p style="color: red; font-size: small;" data-agricola-target="valiva"></p>
+                    </div>
+
+                    <div class="list-group mx-1 col-2">
+                            <b><label for="">Vr Iva</label></b>
+                            {{ form_widget(form_det.vriva, {'attr' : {'class' : 'form-control', 'data-agricola-target':'valcampvriv', 'readonly': true}}) }}
+                    </div>
+                    
+                    <div class="list-group mx-1 col-2">
+                        <div class="row">
+                                <div class="col-9">
+                                        <b><label for="">Total</label></b>
+                                        {{ form_widget(form_det.total, {'attr' : {'class' : 'custom-select', 'data-agricola-target':'valcamptot', 'readonly': true}}) }} 	
+                                </div>
+                        <div class="col-3">
+                                <b><label for="">Add</label></b>
+                                {{ form_widget(form_det.guardar, {'attr' : {'class' : 'btn btn-outline-success', 'data-libros-target':'guardar','style':'width 10px'}}) }}
+                         
+                        </div>
+                    </div>
+                </div>
+     {{ form_end(form_det) }}
+            
+        <br>
+    </div>
+
+</turbo>

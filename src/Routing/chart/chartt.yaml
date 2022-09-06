@@ -1,0 +1,3 @@
+libros_chart:
+    path:     /libros/chart
+    defaults: { _controller: App\Controller\Chart\ChartController::index}

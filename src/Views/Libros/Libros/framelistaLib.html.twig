@@ -1,0 +1,45 @@
+{# CRACION DE EL FRAME QUE VAMOS A UTILIZAR CON TURBO PARA QUE NO SE RECARGE #}
+<turbo-frame id="frame-libros">
+	<div class="list-group-item active">
+		<b>Listado de libros</b>
+	</div
+	<div class="list-group-item" style="height: 400px; overflow-y: scroll;">
+		{% if libros|length == 0 %}
+			No se encontraron libros
+			{%else%}
+		{# Crear tabla #}
+		<table border="1" class="table table-bordered table-hover table-sm mb-0" >
+			<thead class="table-secondary" >
+				<tr>
+
+					<th style="color:#067cfa"> </th>
+					<th style="color:#067cfa">Id</th>
+					<th style="color:#067cfa">Libros</th>
+					<th style="color:#067cfa">Editorial</th>
+					<th style="color:#067cfa">Autor</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for dato in libros  %}
+					<tr>
+						<td align="center">
+						<a href="{{path('libros_ver_lib',{id:dato.id} )}}" target="_top">
+						    {# Icono de editar  #}
+							<span class="fas fa-cog text-primary" style="width: 15px"></span> 
+						</a>
+						</td>
+
+						<td>{{ dato.id}}</td>
+						<td>{{ dato.nombre}}</td>
+						<td>{{ dato.editorial_name}}</td>
+						<td>{{ dato.autor_nombre}}{{ dato.autor_apellido}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+		<br>
+        {# Para poner el paginator #}
+		{{ knp_pagination_render(libros) }} 
+	</div>
+</turbo>

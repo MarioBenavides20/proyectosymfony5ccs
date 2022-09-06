@@ -1,0 +1,28 @@
+{# CREACION DEL FORMULARIO DE CABECERA UTILIZANDO BOOSTRAP #}
+{{ form_start(form, {'attr':{'data-controller': 'agricola', 'data-turbo-frame':'frame-compras'} }) }}
+<div data-agricola-target='formulario'>
+	<div class="form-group row">
+
+		<div class="col-4">
+			<div class="input-group">
+				<span class="input-group-text"><b>Proveedores</b></span>
+				{{ form_widget(form.proveedor, {'attr' : {'class' : 'custom-select', 'data-action':'agricola#buscarProveedores'}}) }}
+			</div>  	
+		</div>
+
+        <div class="col-4">
+			<div class="input-group">
+				<span class="input-group-text"><b>Fechas</b></span>
+				{{ form_widget(form.fecha, {'attr' : {'class' : 'form-control', 'data-action':'blur->agricola#buscarProveedores'}}) }}
+			</div>
+		</div>
+
+        <div class="col-4">
+			<div class="input-group">
+			 {{ form_widget(form.Buscar, {'attr' : {'class' : 'btn btn-outline-success', 'data-agricola-target':'buscador'}}) }}
+			</div>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+</div>

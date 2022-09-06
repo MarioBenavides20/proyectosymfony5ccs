@@ -1,0 +1,10 @@
+{{ form_start(form, {'attr':{'data-controller': 'estudiantes'} }) }} 
+<div data-estudiantes-target='formulario'>
+    {{ form_label(form.docente) }}
+    {{ form_widget(form.docente, {'attr' : {'class' : 'form-control', 'data-action':'estudiantes#buscarMaterias'}}) }}
+    {{ form_label(form.materia) }}
+    {{ form_widget(form.materia, {'attr' : {'class' : 'form-control'}}) }}
+    {{ form_label(form.estudiante) }}
+    {{ form_widget(form.estudiante, {'attr' : {'class' : 'form-control'}}) }}
+    {{ form_end(form) }}
+</div>

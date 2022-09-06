@@ -1,3 +1,17 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+colegio:
+    resource: "../src/Routing/Colegio/Colegio.yaml"
+
+# Llamar la carpeta de rutas y creacion del archivo donde definimos la ruta para ver en la web
+libros:
+    resource: "../src/Routing/Libros/Libros.yaml"
+
+# Llamar la carpeta de rutas y creacion del archivo donde definimos la ruta para ver en la web
+chart:
+    resource: "../src/Routing/chart/chartt.yaml"
+
+# Llamar la carpeta de rutas y creacion del archivo donde definimos la ruta para ver en la web
+campoverde:
+    resource: "../src/Routing/Agricola/Agricola.yaml"

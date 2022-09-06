@@ -1,0 +1,40 @@
+{# CRACION DE EL FRAME QUE VAMOS A UTILIZAR CON TURBO PARA QUE NO SE RECARGE #}
+<turbo-frame id="frame-compras">
+	<div class="list-group-item active">
+		<b><i class="fa-solid fa-list"></i></b>
+	</div>
+	<div class="list-group-item" style="height: 400px; overflow-y: scroll;">
+		{% if compras |length == 0 %}
+			No se encontraronc compras
+			{%else%}
+
+		<table border="1" class="table table-bordered table-hover table-sm mb-0" >
+			<thead class="table-secondary" >
+				<tr>
+					<th style="color:#067cfa">Fecha</th>
+					<th style="color:#067cfa">Numero</th>
+					<th style="color:#067cfa">Proveedor</th>
+					<th style="color:#067cfa">Subtotal</th>
+					<th style="color:#067cfa">Iva</th>
+					<th style="color:#067cfa">Total</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for dato in compras %}
+					<tr>
+						<td>{{ dato.fecha | date("d/m/Y")}}</td>
+						<td>{{ dato.numero}}</td>
+						<td>{{ dato.proveedor_nombre}}</td>
+						<td align="right">{{ dato.subtotalcompra | number_format(2, ',', '.')}}</td>
+						<td align="right">{{dato.ivatotalcompra | number_format(2, ',', '.')}}</td>
+						<td align="right">{{dato.totalcompra | number_format(2, ',', '.')}}</td>	
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+		<br>
+		{{ knp_pagination_render(compras) }} 
+	</div>
+</turbo>

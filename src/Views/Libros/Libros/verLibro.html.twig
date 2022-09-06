@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	{{ parent() }}
+	<div class="container-fluid">
+		<div class="list-group-item active">
+			{{libro.nombre}}
+		</div>
+
+		<div class="row">
+			<div class="list-group-item col-md-6">
+				<table border="1" class="table table-sm table table-bordered table-bordered table-hover mb-0">
+
+					<tr>
+						<div class="input-group ">
+					    	<td><span class="input-group-text bad"><b>Pais</b></span></td>
+							<td>{{libro.pais_nombre}}</td>
+					</tr>
+
+					<tr>
+						<td>Nombre:</td>
+						<td>{{libro.nombre}}</td>
+					</tr>
+
+					<tr>
+						<td>Editorial:</td>
+						<td>{{libro.editorial_name}}</td>
+					</tr>
+                  </table>
+			</div>
+			<div class="list-group-item col-md-6">
+				<table border="1" class="table table-sm table-striped table-bordered table-hover mb-0">
+					<tr>
+						<td>Autor:</td>
+						<td>{{libro.autor_nombre}}{{libro.autor_apellido}}</td>
+					</tr>
+
+					<tr>
+						<td>Fecha de nacimiento:
+						</td>
+						{# CUANDO ES FECHA ES OBLIGATORIO PONERLE | date  #}
+						<td>{{libro.fecha_nacimiento | date("d/m/Y")}}</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+
+{# PARA EDITAR LOS DATOS  #}
+		<!-- Modal --> 
+		<div class="modal fade" id="newLibModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {{ form_start(nuevoLib, {'attr':{'data-controller': 'libros','data-turbo-frame':'frame-libros', 'data-action':'turbo:submit-end->libros#limpiarfrm', 'class':'was-validated'} }) }}
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ingresar libros</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body", data-libros-target='valLibro'>
+						<div class="col-1"><br>
+						</div>
+						
+							{{ form_label(nuevoLib.nombre) }}
+							{{ form_widget(nuevoLib.nombre, {'attr' : {'class' : 'form-control', 'data-action':'libros#validarLibro'}}) }}
+							<p id="msj_libroinv" style="color: #dc3545"></p>
+							{{ form_label(nuevoLib.autor) }}
+							{{ form_widget(nuevoLib.autor, {'attr' : {'class' : 'form-control'}}) }}
+							
+							{{ form_label(nuevoLib.editorial) }}
+							{{ form_widget(nuevoLib.editorial, {'attr' : {'class' : 'form-control'}}) }}
+
+						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" data-libros-target="closemodal">Close</button>
+							{{ form_widget(nuevoLib.guardar, {'attr' : {'class' : 'btn btn-primary'}}) }}
+					</div>
+				</div>
+			</div>
+            {{ form_end(nuevoLib) }}
+		</div>			
+	</div> 
+					<a href="{{path('libros_bienvenida')}}" class="btn btn-danger">Regresar</a> 
+					{# CREACION DEL BOTON MODAL #}
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLibModal">
+							Editar libro
+						</button>
+		{# CREACION DE BOTON ELIMINRA Y FUNCION ELIMINAR REGISTRO #}
+		<a href="{{path('libros_eliminar_lib',{id:libro.id})}}" class="btn btn-danger">Eliminar</a>
+	{% endblock %}
